@@ -81,3 +81,101 @@ class Ensemble:
 
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+
+    @classmethod
+    def create(cls, name, director, level):
+        ensemble = cls(name, director, level)
+        ensemble.save()
+        return ensemble
+    
+    def update(self):
+        sql = """
+            UPDATE ensembles
+            SET name = ?, director = ?, level = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.name, self.director, self.level))
+        CONN.commit()
+    
+    def delete(self):
+        sql = """
+            DELETE FROM ensembles
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.id))
+        CONN.commit()
+
+        del type(self).all[self.id]
+        self.id = None
+
+    @classmethod
+    def instance_from_db(cls, row):
+        ensemble = cls.all.get(row[0])
+        if ensemble:
+            ensemble.name = row[1]
+            ensemble.director = row[2]
+            ensemble.level = row[3]
+        else:
+            ensemble = cls(row[1], row[2], row[3])
+            ensemble.id = row[0]
+            cls.all[ensemble.id] = ensemble
+        return ensemble
+    
+    @classmethod
+    def get_all(cls):
+        sql = """
+            SELECT *
+            FROM ensembles
+            WHERE id = ?
+        """
+
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_name(cls, name):
+        sql = """
+            SELECT *
+            FROM ensembles
+            WHERE name is ?
+        """
+
+        row = CURSOR.execute(sql, (name, )).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_director(cls, director):
+        sql = """
+            SELECT *
+            FROM ensembles
+            WHERE director is ?
+        """
+
+        row = CURSOR.execute(sql, (director, )).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_level(cls, level):
+        sql = """
+            SELECT *
+            FROM ensembles
+            WHERE level is ?
+        """
+
+        row = CURSOR.execute(sql, (level, )).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    def musicians(self):
+        from models.musician import Musician
+        sql = """
+            SELECT *
+            FROM musicians
+            WHERE ensemble_id = ?
+        """
+        CURSOR.execute(sql, (self.id, ),)
+
+        rows = CURSOR.fetchall()
+        return [
+            Musician.instance_from_db(row) for row in rows
+        ]
