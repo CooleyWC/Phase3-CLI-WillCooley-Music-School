@@ -34,11 +34,13 @@ class Musician:
     
     @instrument.setter
     def instrument(self, instrument):
-        if isinstance(instrument, str) and instrument in Musician.VALID_INSTRUMENTS:
+        if type(instrument) != str:
+            raise ValueError('needs to be a string')
+        elif instrument.lower() not in Musician.VALID_INSTRUMENTS:
+            raise ValueError('needs to be in the valid instrument list')
+        else:
             print(f'...setting instrument to {instrument}')
             self._instrument = instrument
-        else:
-            raise ValueError('instrument must be a string and in the valid instrument list')
         
     @property
     def age(self):
@@ -69,9 +71,10 @@ class Musician:
         return self._private_lessons
     
     @private_lessons.setter
-    def private_lessonsts(self, private_lessons):
+    def private_lessons(self, private_lessons):
         if isinstance(private_lessons, str) and private_lessons.lower() == 'yes' or private_lessons.lower() == 'no':
             print(f'...setting private lesson status to {private_lessons}')
+            self._private_lessons = private_lessons
         else:
             raise ValueError('must be a string and yes or no')
 
