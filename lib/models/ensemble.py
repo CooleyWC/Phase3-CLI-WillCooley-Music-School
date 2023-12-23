@@ -4,6 +4,8 @@ from models.__init__ import CURSOR, CONN
 class Ensemble:
 
     ENSEMBLE_LEVELS = ['beginner', 'intermediate', 'advanced']
+
+    all = {}
     
     def __init__(self, name, director, level, id=None):
         self.id = id
@@ -49,4 +51,33 @@ class Ensemble:
             print(f'...setting level to: {level}')
             self._level = level
         
-    
+    @classmethod
+    def create_table(cls):
+        sql = """
+            CREATE TABLE IF NOT EXISTS ensembles (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            director TEXT,
+            level TEXT)
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
+    @classmethod
+    def drop_table(cls):
+        sql = """
+            DROP TABLE IF EXISTS ensembles;
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
+    def save(self):
+        sql = """
+            INSERT INTO ensembles (name, director, level)
+            VALUES (?, ?, ?)
+        """
+        CURSOR.execute(sql, (self.name, self.director, self.level))
+        CONN.commit()
+
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
