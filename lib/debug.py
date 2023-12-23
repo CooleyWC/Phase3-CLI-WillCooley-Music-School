@@ -6,7 +6,7 @@ from models.ensemble import Ensemble
 from models.musician import Musician
 import ipdb
 
-will = Musician('will', 'drums', 45, 33, False)
+will = Musician('will', 'drums', 45, 33, 'yes')
 print(will)
 will.instrument = 'piano'
 print(will)
