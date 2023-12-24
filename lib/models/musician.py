@@ -25,11 +25,11 @@ class Musician:
     
     @name.setter
     def name(self, name):
-        if isinstance(name, str) and 2 <= len(name) <= 15:
+        if isinstance(name, str) and 2 <= len(name) <= 20:
             print(f'...setting name to: {name}')
             self._name = name
         else: 
-            raise ValueError('name must be a non-empty string greater than 2 and less than 15')
+            raise ValueError('name must be a non-empty string greater than 2 and less than 20')
         
     @property
     def instrument(self):
@@ -103,7 +103,7 @@ class Musician:
             age INTEGER,
             audition_score INTEGER,
             private_lessons TEXT,
-            ensemble_id INTEGER
+            ensemble_id INTEGER,
             FOREIGN KEY (ensemble_id) REFERENCES ensembles(id))
         """
         CURSOR.execute(sql)

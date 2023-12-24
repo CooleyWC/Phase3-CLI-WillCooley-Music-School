@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-# lib/debug.py
 
 from models.__init__ import CONN, CURSOR
 from models.ensemble import Ensemble
 from models.musician import Musician
-import ipdb
 
-def reset_database():
+def seed_database():
     Musician.drop_table()
     Ensemble.drop_table()
     Ensemble.create_table()
@@ -21,5 +19,5 @@ def reset_database():
     Musician.create('Ron Carter', 'bass', 42, 89, 'yes', jazz_ensemble_1.id)
     Musician.create('Charlie Parker', 'alto saxophone', 76, 98, 'no', jazz_ensemble_1.id)
 
-reset_database()
-ipdb.set_trace()
+seed_database()
+print('seeded database')
