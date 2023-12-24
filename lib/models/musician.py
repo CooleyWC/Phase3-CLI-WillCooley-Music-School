@@ -5,13 +5,16 @@ class Musician:
 
     VALID_INSTRUMENTS = ['guitar', 'piano', 'bass', 'drums', 'vibraphone', 'trumpet', 'trombone', 'bass trombone', 'alto saxophone', 'tenor saxophone', 'baritone saxophone', 'voice']
 
-    def __init__(self, name, instrument, age, audition_score, private_lessons, id=None):
+    all = {}
+
+    def __init__(self, name, instrument, age, audition_score, private_lessons, ensemble_id, id=None):
         self.name = name
         self.instrument = instrument
         self.age = age
         self.audition_score = audition_score
         self.private_lessons = private_lessons
         self.id = id
+        self.ensemble_id = ensemble_id
 
     def __repr__(self):
         return f'Employee {self.id}: {self.name}, {self.instrument}'
@@ -78,5 +81,131 @@ class Musician:
         else:
             raise ValueError('must be a string and yes or no')
 
-    
 
+    @property
+    def ensemble_id(self):
+        return self._ensemble_id
+
+    @ensemble_id.setter
+    def ensemble_id(self, ensemble_id):
+        if type(ensemble_id) is int and Ensemble.find_by_id(ensemble_id):
+            self._ensemble_id = ensemble_id
+        else: 
+            raise ValueError('ensemble id must reference the ensemble in the database')
+        
+    @classmethod
+    def create_table(cls):
+        sql = """
+            CREATE TABLE IF NOT EXISTS musicians (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            instrument TEXT,
+            age INTEGER,
+            audition_score INTEGER,
+            private_lessons TEXT,
+            ensemble_id INTEGER
+            FOREIGN KEY (ensemble_id) REFERENCES ensembles(id))
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
+    @classmethod
+    def drop_table(cls):
+        sql = """
+            DROP TABLE IF EXISTS musicians;
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
+    def save(self):
+        sql = """
+            INSERT INTO musicians (name, instrument, age, audition_score, private_lessons, ensemble_id)
+            VALUES (?, ? , ?, ?, ?, ?)
+        """
+        CURSOR.execute(sql, (self.name, self.instrument, self.age, self.audition_score, self.private_lessons, self.ensemble_id))
+        CONN.commit()
+
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
+
+    def update(self):
+        sql = """
+            UPDATE musicians
+            SET name = ?, instrument = ?, age = ?, audition_score = ?, private_lessons = ?, ensemble_id = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.name, self.instrument, self.age, self.audition_score, self.private_lessons, self.ensemble_id))
+        CONN.commit()
+
+    def delete(self):
+        sql = """
+            DELETE FROM musicians
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        del type(self).all[self.id]
+
+        self.id = None
+
+    @classmethod
+    def create(cls, name, instrument, age, audition_score, private_lessons, ensemble_id):
+        musician = cls(name, instrument, age, audition_score, private_lessons, ensemble_id)
+        musician.save()
+        return musician
+    
+    @classmethod
+    def instance_from_db(cls, row):
+        musician = cls.all.get(row[0])
+        if musician:
+            musician.name = row[1]
+            musician.instrument = row[2]
+            musician.audition_score = row[3]
+            musician.private_lessons = row[4]
+            musician.ensemble_id = row[5]
+        else:
+            musician = cls(row[1], row[2], row[3], row[4], row[5])
+            musician.id = row[0]
+            cls.all[musician.id] = musician
+        return musician
+    
+    @classmethod
+    def get_all(cls):
+        sql = """
+            SELECT *
+            FROM musicians
+        """
+        rows = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
+
+    @classmethod
+    def find_by_id(cls, id):
+        sql = """
+            SELECT *
+            FROM musicians
+            WHERE id = ?
+        """ 
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_name(cls, name):
+        sql = """
+            SELECT *
+            FROM musicians
+            WHERE name is ?
+        """ 
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_instrument(cls, instrument):
+        sql = """
+            SELECT *
+            FROM musicians
+            WHERE instrument is ?
+        """ 
+        row = CURSOR.execute(sql, (instrument,)).fetchone()
+        return cls.instance_from_db(row) if row else None
