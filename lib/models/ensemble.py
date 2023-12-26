@@ -20,7 +20,6 @@ class Ensemble:
     @name.setter
     def name(self, name):
         if isinstance(name, str) and 4 <= len(name) <= 20:
-            print(f'...setting ensemble name to: {name}')
             self._name = name
         else:
             raise ValueError('must be a string and between 4 and 12 characters')
@@ -32,7 +31,6 @@ class Ensemble:
     @director.setter
     def director(self, director):
         if isinstance(director, str) and 2 <= len(director) <= 20:
-            print(f'...setting director to: {director}')
             self._director = director
         else:
             raise ValueError('must be a string and between 2 and 20 characters')
@@ -48,7 +46,6 @@ class Ensemble:
         elif level not in Ensemble.ENSEMBLE_LEVELS:
             raise ValueError('needs to be an acceptable ensemble level')
         else:
-            print(f'...setting level to: {level}')
             self._level = level
         
     @classmethod
@@ -127,11 +124,10 @@ class Ensemble:
         sql = """
             SELECT *
             FROM ensembles
-            WHERE id = ?
         """
 
-        row = CURSOR.execute(sql, (id,)).fetchone()
-        return cls.instance_from_db(row) if row else None
+        rows = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
     
     @classmethod
     def find_by_id(cls, id):

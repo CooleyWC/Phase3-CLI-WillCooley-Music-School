@@ -1,8 +1,8 @@
 # lib/cli.py
 
 from helpers import (
+    list_ensembles,
     exit_program,
-    helper_1
 )
 
 
@@ -10,18 +10,18 @@ def main():
     while True:
         menu()
         choice = input("> ")
-        if choice == "0":
+        if choice == "M":
+            list_ensembles()
+        elif choice == "E":
             exit_program()
-        elif choice == "1":
-            helper_1()
         else:
             print("Invalid choice")
 
 
 def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
+    print("Welcome to Will Cooley's Music School")
+    print("Type M to see the ensembles")
+    print("Type E to exit the program")
 
 
 if __name__ == "__main__":
