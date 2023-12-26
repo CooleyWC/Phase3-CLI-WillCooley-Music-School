@@ -1,9 +1,15 @@
 # lib/helpers.py
+from models.ensemble import Ensemble
+from models.musician import Musician
 
-def helper_1():
-    print("Performing useful function#1.")
+def list_ensembles():
+    ensembles = Ensemble.get_all()
+    for ensemble in ensembles:
+        print(ensemble)
 
 
 def exit_program():
-    print("Goodbye!")
+    print("see ya later")
     exit()
+
+
