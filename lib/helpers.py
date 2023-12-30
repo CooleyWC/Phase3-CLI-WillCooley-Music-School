@@ -4,12 +4,20 @@ from models.musician import Musician
 
 def list_ensembles():
     ensembles = Ensemble.get_all()
-    for ensemble in ensembles:
-        print(ensemble)
+    for i, ensemble in enumerate(ensembles, start=1):
+        print(i, ensemble.name)
 
 
 def exit_program():
     print("see ya later")
     exit()
 
-
+def add_ensemble():
+    name = input("Enter the new ensemble's name: ")
+    director = input("Enter the new ensemble's director: ")
+    level = input("Enter the ensembles level (beginniner, intermediate, or advanced): ")
+    try:
+        ensemble = Ensemble.create(name, director, level)
+        print(f"Success: {ensemble.name} has been added")
+    except Exception as exc:
+        print("Uh-Oh: There has been a problem with adding your ensemble", exc)
