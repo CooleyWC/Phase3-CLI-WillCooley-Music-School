@@ -3,7 +3,8 @@
 from helpers import (
     list_ensembles,
     exit_program,
-    add_ensemble
+    add_ensemble,
+    view_ensemble
 )
 
 
@@ -29,16 +30,24 @@ def ensembles():
     while True:
         ensembles_menu()
         choice = input("> ")
-        if choice == "B":
-            break
+        if choice.isdigit():
+            view_ensemble(int(choice))
         elif choice == "C":
-            add_ensemble()
+            add_ensemble()    
+        elif choice == "B":
+            break
         else:
             print('Invalid Choice')
 
 def ensembles_menu():
-    print("Type B to go back to the main menu")
+    print("Type the number of the Ensemble to view its details")
     print("Type C to add a new ensemble")
+    print("Type B to go back to the main menu")
+
+
+
+
+    
 
 
 
