@@ -7,6 +7,11 @@ def list_ensembles():
     for i, ensemble in enumerate(ensembles, start=1):
         print(i, ensemble.name)
 
+def view_ensemble(num):
+    id_ = num - 1
+    ensemble = Ensemble.find_by_id(id_)
+    print(f"You selected: {num}\n {ensemble.name} \n Director: {ensemble.director} \n Level: {ensemble.level}")
+
 
 def exit_program():
     print("see ya later")
