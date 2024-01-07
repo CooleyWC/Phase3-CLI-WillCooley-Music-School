@@ -61,7 +61,7 @@ def ensemble_options(selected_ensemble):
             list_ensembles()
             break
         elif choice == "D":
-            delete_ensemble()
+            delete_ensemble(selected_ensemble)
         elif choice == "B":
             break
         elif choice == "E":
