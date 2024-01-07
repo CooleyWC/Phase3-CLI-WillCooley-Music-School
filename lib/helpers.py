@@ -31,7 +31,12 @@ def update_ensemble(num):
         print("Invalid number selection")
 
 def delete_ensemble(num):
-    pass
+    id_ = num
+    if ensemble := Ensemble.find_by_id(id_):
+        ensemble.delete()
+        print(f"Ensemble {id_} was successfully deleted.")
+    else:
+        print(f"Error: check that you selected a correct number corresponding to an ensemble")
 
 
 def exit_program():
