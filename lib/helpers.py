@@ -8,9 +8,30 @@ def list_ensembles():
         print(i, ensemble.name)
 
 def view_ensemble(num):
-    id_ = num - 1
+    id_ = num
     ensemble = Ensemble.find_by_id(id_)
     print(f"You selected: {num}\n {ensemble.name} \n Director: {ensemble.director} \n Level: {ensemble.level}")
+
+def update_ensemble(num):
+    id_ = num
+    if ensemble := Ensemble.find_by_id(id_):
+        try:
+            name = input("Enter the ensemble's new name: ")
+            ensemble.name = name
+            director = input("Enter the ensemble's new director: ")
+            ensemble.director = director
+            level = input("Enter the ensemble's new level: ")
+            ensemble.level = level
+
+            ensemble.update()
+            print(f"{ensemble.name} was successfully updated")
+        except Exception as exc:
+            print(f"Error updating Ensemble", exc)
+    else:
+        print("Invalid number selection")
+
+def delete_ensemble(num):
+    pass
 
 
 def exit_program():
