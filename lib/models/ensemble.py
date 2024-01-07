@@ -91,7 +91,7 @@ class Ensemble:
             SET name = ?, director = ?, level = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.name, self.director, self.level))
+        CURSOR.execute(sql, (self.name, self.director, self.level, self.id))
         CONN.commit()
     
     def delete(self):
