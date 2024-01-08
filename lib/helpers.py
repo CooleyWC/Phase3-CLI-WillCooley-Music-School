@@ -20,7 +20,7 @@ def update_ensemble(num):
             ensemble.name = name
             director = input("Enter the ensemble's new director: ")
             ensemble.director = director
-            level = input("Enter the ensemble's new level: ")
+            level = input("Enter the ensemble's new level - must be one of the following all lowercase ('beginner', 'intermediate', 'advanced'): ")
             ensemble.level = level
 
             ensemble.update()
