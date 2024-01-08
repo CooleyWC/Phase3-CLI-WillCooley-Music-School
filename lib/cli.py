@@ -8,7 +8,8 @@ from helpers import (
     update_ensemble,
     delete_ensemble,
     find_ensemble_by_director,
-    find_ensemble_by_level
+    find_ensemble_by_level,
+    list_musicians
 )
 
 
@@ -16,9 +17,11 @@ def main():
     while True:
         main_menu()
         choice = input("> ")
-        if choice == "M" or choice == "m":
+        if choice == "Ens" or choice == "ens":
             list_ensembles()
             ensembles()
+        elif choice == "Mus" or choice == "mus":
+            musicians()
         elif choice == "E" or choice == "e":
             exit_program()
         else:
@@ -27,7 +30,8 @@ def main():
 
 def main_menu():
     print("Welcome to Will Cooley's Music School")
-    print("Type M or m to see the ensembles")
+    print("Type Ens or ens to see the ensembles")
+    print("Type Mus or mus to see the musicians")
     print("Type E or e to exit the program")
 
 def ensembles():
@@ -73,6 +77,9 @@ def ensemble_options(selected_ensemble):
             delete_ensemble(selected_ensemble)
             list_ensembles()
             break
+        elif choice == "V" or choice == "v":
+            pass
+
         elif choice == "B" or choice ==  "b":
             list_ensembles()
             break
@@ -85,8 +92,28 @@ def ensemble_options(selected_ensemble):
 def ensemble_options_menu():
     print("Type U or u to update this ensemble")
     print("Type D or d to delete this ensemble")
+    print("Type V or v to view this ensemble's musicians")
     print("Type B or b to go back to ensemble menu")
     print("Type E or e to exit the program")
+
+def musicians():
+    while True:
+        musicians_menu()
+        choice = input("> ")
+        if choice == "V" or choice == "v":
+            list_musicians()
+        elif choice == "B" or choice == "b":
+            break
+        elif choice == "E" or choice =="e":
+            exit_program()
+        else:
+            print('Invalid Choice')
+
+def musicians_menu():
+    print("Type V or v to view all musicians enrolled in the school")
+    print("Type B or b to go back to ensemble menu")
+    print("Type E or e to exit the program")
+
 
 
 
