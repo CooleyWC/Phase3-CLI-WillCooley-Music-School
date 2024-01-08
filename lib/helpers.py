@@ -52,3 +52,21 @@ def add_ensemble():
         print(f"Success: {ensemble.name} has been added")
     except Exception as exc:
         print("Uh-Oh: There has been a problem with adding your ensemble", exc)
+
+# find a way to make this case insensitive
+def find_ensemble_by_director():
+    name = input("Type the director's name: ")
+    ensemble = Ensemble.find_by_director(name)
+    if ensemble:
+        print(f"{ensemble.director} is the director of {ensemble.name}")
+    else:
+        print('director not found')
+
+# this currently only finds just the first instance that matches the level but not all
+def find_ensemble_by_level():
+    level = input("Type the level of the ensemble: ")
+    ensemble = Ensemble.find_by_level(level)
+    if ensemble:
+        print(f"{ensemble.name} is {ensemble.level}")
+    else:
+        print('no ensembles match the entered level')

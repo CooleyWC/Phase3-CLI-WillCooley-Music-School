@@ -6,7 +6,9 @@ from helpers import (
     add_ensemble,
     view_ensemble,
     update_ensemble,
-    delete_ensemble
+    delete_ensemble,
+    find_ensemble_by_director,
+    find_ensemble_by_level
 )
 
 
@@ -38,7 +40,12 @@ def ensembles():
             view_ensemble(selected_ensemble)
             ensemble_options(selected_ensemble)
         elif choice == "C" or choice == "c":
-            add_ensemble()    
+            add_ensemble()
+        elif choice == "Dir" or choice == "dir":
+            find_ensemble_by_director()
+            list_ensembles()
+        elif choice == "L" or choice == "l":
+            find_ensemble_by_level()    
         elif choice == "B" or choice == "b":
             break
         elif choice == "E" or choice == "e":
@@ -49,6 +56,8 @@ def ensembles():
 def ensembles_menu():
     print("Type the number of the Ensemble to view its details")
     print("Type C or c to add a new ensemble")
+    print("Type Dir or dir to find an ensemble by director")
+    print("Type L or l to find an ensemble by level")
     print("Type B or b to go back to the main menu")
     print("Type E or e to exit the program")
 
@@ -62,7 +71,10 @@ def ensemble_options(selected_ensemble):
             break
         elif choice == "D" or choice == "d":
             delete_ensemble(selected_ensemble)
+            list_ensembles()
+            break
         elif choice == "B" or choice ==  "b":
+            list_ensembles()
             break
         elif choice == "E" or choice =="e":
             exit_program()
