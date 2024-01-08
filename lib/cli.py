@@ -9,6 +9,7 @@ from helpers import (
     delete_ensemble,
     find_ensemble_by_director,
     find_ensemble_by_level,
+    view_ensemble_musicians,
     list_musicians
 )
 
@@ -78,7 +79,7 @@ def ensemble_options(selected_ensemble):
             list_ensembles()
             break
         elif choice == "V" or choice == "v":
-            pass
+            view_ensemble_musicians(selected_ensemble)
 
         elif choice == "B" or choice ==  "b":
             list_ensembles()
