@@ -19,10 +19,10 @@ class Ensemble:
     
     @name.setter
     def name(self, name):
-        if isinstance(name, str) and 4 <= len(name) <= 20:
+        if isinstance(name, str) and 4 <= len(name) <= 25:
             self._name = name
         else:
-            raise ValueError('must be a string and between 4 and 12 characters')
+            raise ValueError('must be a string and between 4 and 25 characters')
         
     @property
     def director(self):

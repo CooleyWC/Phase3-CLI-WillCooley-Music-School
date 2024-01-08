@@ -72,6 +72,15 @@ def find_ensemble_by_level():
     else:
         print('no ensembles match the entered level')
 
+# if the selected ensembles id matches the musicians ensemble_id attribute, return just those matching musicians
+def view_ensemble_musicians(num):
+    ensemble = Ensemble.find_by_id(num)
+    if ensemble:
+        print(f"{ensemble.name}")
+        ensemble_musicians = ensemble.musicians()
+        for i, musician in enumerate(ensemble_musicians, start=1):
+            print(f"{i} Name: {musician.name}, Instrument: {musician.instrument}, Age: {musician.age}, Audition Score: {musician.audition_score}, Enrolled in Private Lessons?: {musician.private_lessons}")
+
 def list_musicians():
     musicians = Musician.get_all()
     for i, musician in enumerate(musicians, start=1):
