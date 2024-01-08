@@ -17,7 +17,7 @@ class Musician:
         self.ensemble_id = ensemble_id
 
     def __repr__(self):
-        return f'Employee {self.id}: {self.name}, {self.instrument}'
+        return f'Musician {self.id}: {self.name}, {self.instrument}'
     
     @property
     def name(self):
@@ -26,7 +26,6 @@ class Musician:
     @name.setter
     def name(self, name):
         if isinstance(name, str) and 2 <= len(name) <= 20:
-            print(f'...setting name to: {name}')
             self._name = name
         else: 
             raise ValueError('name must be a non-empty string greater than 2 and less than 20')
@@ -42,7 +41,6 @@ class Musician:
         elif instrument.lower() not in Musician.VALID_INSTRUMENTS:
             raise ValueError('needs to be in the valid instrument list')
         else:
-            print(f'...setting instrument to: {instrument}')
             self._instrument = instrument
         
     @property
@@ -52,7 +50,6 @@ class Musician:
     @age.setter
     def age(self, age):
         if isinstance(age, int) and 18 <= age <= 99:
-            print(f'...setting age to: {age}')
             self._age = age
         else:
             raise ValueError('must be an integer and between 18 and 99')
@@ -64,7 +61,6 @@ class Musician:
     @audition_score.setter
     def audition_score(self, audition_score):
         if isinstance(audition_score, int) and 1 <= audition_score <=100:
-            print(f'...setting audition score to: {audition_score}')
             self._audition_score = audition_score
         else:
             raise ValueError('must be an integer between 1 and 100')
@@ -76,7 +72,6 @@ class Musician:
     @private_lessons.setter
     def private_lessons(self, private_lessons):
         if isinstance(private_lessons, str) and private_lessons.lower() == 'yes' or private_lessons.lower() == 'no':
-            print(f'...setting private lesson status to: {private_lessons}')
             self._private_lessons = private_lessons
         else:
             raise ValueError('must be a string and yes or no')
@@ -162,11 +157,12 @@ class Musician:
         if musician:
             musician.name = row[1]
             musician.instrument = row[2]
-            musician.audition_score = row[3]
-            musician.private_lessons = row[4]
-            musician.ensemble_id = row[5]
+            musician.age = row[3]
+            musician.audition_score = row[4]
+            musician.private_lessons = row[5]
+            musician.ensemble_id = row[6]
         else:
-            musician = cls(row[1], row[2], row[3], row[4], row[5])
+            musician = cls(row[1], row[2], row[3], row[4], row[5], row[6])
             musician.id = row[0]
             cls.all[musician.id] = musician
         return musician

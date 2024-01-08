@@ -7,6 +7,7 @@ def list_ensembles():
     for i, ensemble in enumerate(ensembles, start=1):
         print(i, ensemble.name)
 
+# why do i not need to subtract the number by one?
 def view_ensemble(num):
     id_ = num
     ensemble = Ensemble.find_by_id(id_)
@@ -70,3 +71,8 @@ def find_ensemble_by_level():
         print(f"{ensemble.name} is {ensemble.level}")
     else:
         print('no ensembles match the entered level')
+
+def list_musicians():
+    musicians = Musician.get_all()
+    for i, musician in enumerate(musicians, start=1):
+        print(f"{i} Name: {musician.name}, Instrument: {musician.instrument}, Age: {musician.age}, Audition Score: {musician.audition_score}, Enrolled in Private Lessons?: {musician.private_lessons}, Ensemble ID: {musician.ensemble_id}")
