@@ -175,7 +175,7 @@ class Musician:
         """
         rows = CURSOR.execute(sql).fetchall()
         return [cls.instance_from_db(row) for row in rows]
-
+    
     @classmethod
     def find_by_id(cls, id):
         sql = """
@@ -185,7 +185,7 @@ class Musician:
         """ 
         row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
-    
+
     @classmethod
     def find_by_name(cls, name):
         sql = """
@@ -203,5 +203,7 @@ class Musician:
             FROM musicians
             WHERE instrument is ?
         """ 
-        row = CURSOR.execute(sql, (instrument,)).fetchone()
-        return cls.instance_from_db(row) if row else None
+        # row = CURSOR.execute(sql, (instrument,)).fetchone()
+        # return cls.instance_from_db(row) if row else None
+        rows = CURSOR.execute(sql, (instrument,)).fetchall()
+        return [cls.instance_from_db(row) for row in rows]

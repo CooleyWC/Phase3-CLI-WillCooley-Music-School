@@ -98,3 +98,28 @@ def add_musician():
         print(f"Success: {musician.name} was successfully created")
     except Exception as exc:
         print("Uh oh there was an error creating your musician", exc)
+
+def find_musician_by_name():
+    name = input("Type the musician's name: ")
+    musician = Musician.find_by_name(name)
+    if musician:
+        print(f"{musician.name} is enrolled, he plays the {musician.instrument}. Would you like to see more details?")
+        answer = input("Type yes or no: ")
+        if answer == 'yes':
+            print(f"Extra details about {musician.name}\n Age: {musician.age}, Audition Score: {musician.audition_score}, Enrolled in private lessons?: {musician.private_lessons}, Id of ensemble the musician plays in: {musician.ensemble_id}")
+        else:
+            print('okay')
+    else:
+        print(f"{name} was not found")
+
+def view_musicians_by_instrument():
+    pass
+    instrument_select = input("Type an instrument: ")
+    instrument = Musician.find_by_instrument(instrument_select)
+    for i, musician in enumerate(instrument, start=1):
+        print(f"{i} Name: {musician.name}, Instrument: {musician.instrument}")
+    else:
+        if not instrument:
+            print(f'Uh oh - we do not have any {instrument_select} players here' )
+
+
