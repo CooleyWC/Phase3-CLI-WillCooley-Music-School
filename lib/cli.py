@@ -1,4 +1,10 @@
 # lib/cli.py
+from rich.console import Console
+from rich.theme import Theme
+
+custom_theme = Theme({'error': 'bold red'})
+
+console = Console(theme=custom_theme)
 
 from helpers import (
     list_ensembles,
@@ -29,11 +35,11 @@ def main():
         elif choice == "E" or choice == "e":
             exit_program()
         else:
-            print("Invalid choice")
+            console.print("Invalid choice", style='error')
 
 
 def main_menu():
-    print("Welcome to Will Cooley's Music School")
+    console.print("Welcome to Will Cooley's Music School", style="bold underline cyan on black")
     print("Type Ens or ens to see the ensembles")
     print("Type Mus or mus to see the musicians")
     print("Type E or e to exit the program")
@@ -90,7 +96,7 @@ def ensemble_options(selected_ensemble):
         elif choice == "E" or choice =="e":
             exit_program()
         else:
-            print('Invalid Choice')
+            console.print('Invalid Choice', style='error')
         
 
 def ensemble_options_menu():
@@ -120,6 +126,7 @@ def musicians():
             print('Invalid Choice')
 
 def musicians_menu():
+    console.print("Musician Menu", style="bold underline cyan on black")
     print("Type V or v to view all enrolled musicians")
     print("Type A or a to add a musician")
     print("Type N or n to find a musician by name")
