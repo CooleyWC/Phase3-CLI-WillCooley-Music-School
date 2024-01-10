@@ -11,7 +11,9 @@ from helpers import (
     find_ensemble_by_level,
     view_ensemble_musicians,
     list_musicians,
-    add_musician
+    add_musician,
+    find_musician_by_name,
+    view_musicians_by_instrument
 )
 
 
@@ -106,6 +108,10 @@ def musicians():
             list_musicians()
         elif choice == "A" or choice == "a":
             add_musician()
+        elif choice == "N" or choice == "n":
+            find_musician_by_name()
+        elif choice == "I" or choice == "i":
+            view_musicians_by_instrument()
         elif choice == "B" or choice == "b":
             break
         elif choice == "E" or choice =="e":
@@ -116,6 +122,8 @@ def musicians():
 def musicians_menu():
     print("Type V or v to view all enrolled musicians")
     print("Type A or a to add a musician")
+    print("Type N or n to find a musician by name")
+    print("Type I or i to view the musicians that play a particular instrument")
     print("Type B or b to go back to ensemble menu")
     print("Type E or e to exit the program")
 
