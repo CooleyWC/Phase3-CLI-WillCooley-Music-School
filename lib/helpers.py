@@ -85,3 +85,16 @@ def list_musicians():
     musicians = Musician.get_all()
     for i, musician in enumerate(musicians, start=1):
         print(f"{i} Name: {musician.name}, Instrument: {musician.instrument}, Age: {musician.age}, Audition Score: {musician.audition_score}, Enrolled in Private Lessons?: {musician.private_lessons}, Ensemble ID: {musician.ensemble_id}")
+
+def add_musician():
+    name = input("Type the new musician's name: ")
+    instrument = input("Type the new musician's instrument: ")
+    age = int(input("Type the musician's age: "))
+    audition_score = int(input("Type the musician's audition_score: "))
+    private_lessons = input("Is the musician in enrolled in private lessons? (yes or no): ")
+    ensemble_id = int(input("Enter the id of the ensemble the musician was placed in: "))
+    try:
+        musician = Musician.create(name, instrument, age, audition_score, private_lessons, ensemble_id)
+        print(f"Success: {musician.name} was successfully created")
+    except Exception as exc:
+        print("Uh oh there was an error creating your musician", exc)

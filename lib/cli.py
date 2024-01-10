@@ -10,7 +10,8 @@ from helpers import (
     find_ensemble_by_director,
     find_ensemble_by_level,
     view_ensemble_musicians,
-    list_musicians
+    list_musicians,
+    add_musician
 )
 
 
@@ -44,7 +45,7 @@ def ensembles():
             selected_ensemble = int(choice)
             view_ensemble(selected_ensemble)
             ensemble_options(selected_ensemble)
-        elif choice == "C" or choice == "c":
+        elif choice == "A" or choice == "a":
             add_ensemble()
         elif choice == "Dir" or choice == "dir":
             find_ensemble_by_director()
@@ -60,7 +61,7 @@ def ensembles():
 
 def ensembles_menu():
     print("Type the number of the Ensemble to view its details")
-    print("Type C or c to add a new ensemble")
+    print("Type A or a to add a new ensemble")
     print("Type Dir or dir to find an ensemble by director")
     print("Type L or l to find an ensemble by level")
     print("Type B or b to go back to the main menu")
@@ -103,6 +104,8 @@ def musicians():
         choice = input("> ")
         if choice == "V" or choice == "v":
             list_musicians()
+        elif choice == "A" or choice == "a":
+            add_musician()
         elif choice == "B" or choice == "b":
             break
         elif choice == "E" or choice =="e":
@@ -111,7 +114,8 @@ def musicians():
             print('Invalid Choice')
 
 def musicians_menu():
-    print("Type V or v to view all musicians enrolled in the school")
+    print("Type V or v to view all enrolled musicians")
+    print("Type A or a to add a musician")
     print("Type B or b to go back to ensemble menu")
     print("Type E or e to exit the program")
 
