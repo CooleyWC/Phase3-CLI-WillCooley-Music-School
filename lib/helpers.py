@@ -1,12 +1,14 @@
 # lib/helpers.py
 from models.ensemble import Ensemble
 from models.musician import Musician
-
+from rich.theme import Theme
+from rich.console import Theme
 
 from rich.console import Console
 from rich.table import Table
 
-# table = Table(title='All Musicians')
+custom_theme = Theme({'success': 'green', 'error': 'bold red'})
+console = Console(theme=custom_theme)
 
 def list_ensembles():
     table = Table(title = 'All Ensembles')
@@ -20,9 +22,19 @@ def list_ensembles():
 
 # why do i not need to subtract the number by one?
 def view_ensemble(num):
+    table = Table(title='Ensemble Details')
+    table.add_column(" ")
+    table.add_column("Name", style='cyan')
+    table.add_column("Director", style='medium_orchid')
+    table.add_column("Level")
+
     id_ = num
     ensemble = Ensemble.find_by_id(id_)
-    print(f"You selected: {num}\n {ensemble.name} \n Director: {ensemble.director} \n Level: {ensemble.level}")
+    table.add_row(str(num), ensemble.name, ensemble.director, ensemble.level)
+    # print(f"You selected: {num}\n {ensemble.name} \n Director: {ensemble.director} \n Level: {ensemble.level}")
+
+    console = Console()
+    console.print(table)
 
 def update_ensemble(num):
     id_ = num
@@ -38,15 +50,15 @@ def update_ensemble(num):
             ensemble.update()
             print(f"{ensemble.name} was successfully updated")
         except Exception as exc:
-            print(f"Error updating Ensemble", exc)
+            console.print(f"Error updating Ensemble", exc, style='error')
     else:
-        print("Invalid number selection")
+        console.print("Invalid number selection", style='error')
 
 def delete_ensemble(num):
     id_ = num
     if ensemble := Ensemble.find_by_id(id_):
         ensemble.delete()
-        print(f"Ensemble {id_} was successfully deleted.")
+        console.print(f"Ensemble {id_} was successfully deleted.", style='success')
     else:
         print(f"Error: check that you selected a correct number corresponding to an ensemble")
 
@@ -85,11 +97,20 @@ def find_ensemble_by_level():
 
 def view_ensemble_musicians(num):
     ensemble = Ensemble.find_by_id(num)
+    table = Table(title='Musicians')
+    table.add_column(" ")
+    table.add_column("Name", justify='left', style='cyan', no_wrap=True)
+    table.add_column("Instrument", style="magenta")
+    table.add_column("Age")
+    table.add_column('Audition Score')
+    table.add_column('Enrolled in Private Lessons')
     if ensemble:
         print(f"{ensemble.name}")
         ensemble_musicians = ensemble.musicians()
         for i, musician in enumerate(ensemble_musicians, start=1):
-            print(f"{i} Name: {musician.name}, Instrument: {musician.instrument}, Age: {musician.age}, Audition Score: {musician.audition_score}, Enrolled in Private Lessons?: {musician.private_lessons}")
+            table.add_row(str(i), musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons)
+    console = Console()
+    console.print(table)
 
 def list_musicians():
     musicians = Musician.get_all()
@@ -115,9 +136,9 @@ def add_musician():
     ensemble_id = int(input("Enter the id of the ensemble the musician was placed in: "))
     try:
         musician = Musician.create(name, instrument, age, audition_score, private_lessons, ensemble_id)
-        print(f"Success: {musician.name} was successfully created")
+        console.print(f"Success: {musician.name} was successfully created", style='success')
     except Exception as exc:
-        print("Uh oh there was an error creating your musician", exc)
+        console.print("Uh oh there was an error creating your musician", exc, style='error')
 
 def find_musician_by_name():
     name = input("Type the musician's name: ")
@@ -137,9 +158,9 @@ def find_musician_by_name():
             console = Console()
             console.print(table)
         else:
-            print('okay')
+            console.print('okay', style='success')
     else:
-        print(f"{name} was not found")
+        console.print(f"{name} was not found", style='error')
 
 def view_musicians_by_instrument():
     pass
@@ -149,6 +170,6 @@ def view_musicians_by_instrument():
         print(f"{i} Name: {musician.name}, Instrument: {musician.instrument}")
     else:
         if not instrument:
-            print(f'Uh oh - we do not have any {instrument_select} players here' )
+            console.print(f'Uh oh - it appears we do not have any {instrument_select} players here', style='error')
 
 
