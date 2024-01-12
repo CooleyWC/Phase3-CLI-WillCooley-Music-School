@@ -3,6 +3,7 @@ from models.ensemble import Ensemble
 from models.musician import Musician
 from rich.theme import Theme
 from rich.console import Theme
+from rich.style import Style
 
 from rich.console import Console
 from rich.table import Table
@@ -144,7 +145,7 @@ def add_musician():
         console.print("Uh oh there was an error creating your musician", exc, style='error')
 
 def find_musician_by_name():
-    name = input("Type the musician's name: ")
+    name = input("Type the musician's name (Include first and last name and titlecase ex: Will Cooley): ")
     musician = Musician.find_by_name(name)
 
     table = Table(title='Musician Details')
@@ -154,7 +155,9 @@ def find_musician_by_name():
     table.add_column('Audition Score')
     table.add_column('Enrolled in Private Lessons')
     if musician:
-        print(f"{musician.name} is enrolled, he plays the {musician.instrument}. Would you like to see more details?")
+        musician_style_name = Style(color='cyan', bold=True)
+        console = Console(theme=custom_theme)
+        console.print(f"[{musician_style_name}]{musician.name}[/] is enrolled, he plays the {musician.instrument}. Would you like to see more details?")
         answer = input("Type yes or no: ")
         if answer == 'yes':
             table.add_row(musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons)
