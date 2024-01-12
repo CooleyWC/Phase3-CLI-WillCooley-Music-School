@@ -63,7 +63,7 @@ def delete_ensemble(num):
 
 
 def exit_program():
-    print("see ya later")
+    console.print("see ya later", style='spring_green3')
     exit()
 
 def add_ensemble():
@@ -97,11 +97,6 @@ def find_ensemble_by_level():
 
     console = Console()
     console.print(table)
-
-    # if ensemble:
-    #     print(f"{ensemble.name} is {ensemble.level}")
-    # else:
-    #     print('no ensembles match the entered level')
 
 def view_ensemble_musicians(num):
     ensemble = Ensemble.find_by_id(num)
