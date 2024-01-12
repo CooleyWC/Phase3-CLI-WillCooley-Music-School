@@ -2,6 +2,11 @@
 from models.ensemble import Ensemble
 from models.musician import Musician
 
+from rich.console import Console
+from rich.table import Table
+
+# table = Table(title='All Musicians')
+
 def list_ensembles():
     ensembles = Ensemble.get_all()
     for i, ensemble in enumerate(ensembles, start=1):
@@ -72,7 +77,6 @@ def find_ensemble_by_level():
     else:
         print('no ensembles match the entered level')
 
-# if the selected ensembles id matches the musicians ensemble_id attribute, return just those matching musicians
 def view_ensemble_musicians(num):
     ensemble = Ensemble.find_by_id(num)
     if ensemble:
@@ -83,9 +87,19 @@ def view_ensemble_musicians(num):
 
 def list_musicians():
     musicians = Musician.get_all()
+    table = Table(title='All Musicians')
+    table.add_column("number")
+    table.add_column("Name", justify='right', style='cyan', no_wrap=True)
+    table.add_column("Instrument", style="magenta")
+    table.add_column("Age")
+    table.add_column('Audition Score')
+    table.add_column('Enrolled in Private Lessons')
     for i, musician in enumerate(musicians, start=1):
-        print(f"{i} Name: {musician.name}, Instrument: {musician.instrument}, Age: {musician.age}, Audition Score: {musician.audition_score}, Enrolled in Private Lessons?: {musician.private_lessons}, Ensemble ID: {musician.ensemble_id}")
+        table.add_row(str(i), musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons)
 
+    console = Console()
+    console.print(table)
+    
 def add_musician():
     name = input("Type the new musician's name: ")
     instrument = input("Type the new musician's instrument: ")
