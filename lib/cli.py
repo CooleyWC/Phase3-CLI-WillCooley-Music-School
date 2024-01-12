@@ -39,7 +39,7 @@ def main():
 
 
 def main_menu():
-    console.print("Welcome to Will Cooley's Music School", style="bold underline cyan on black")
+    console.print("Welcome to Will Cooley's Music School", style="bold underline deep_sky_blue1")
     print("Type Ens or ens to see the ensembles")
     print("Type Mus or mus to see the musicians")
     print("Type E or e to exit the program")
