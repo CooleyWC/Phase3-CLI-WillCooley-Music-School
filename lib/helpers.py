@@ -31,7 +31,6 @@ def view_ensemble(num):
     id_ = num
     ensemble = Ensemble.find_by_id(id_)
     table.add_row(str(num), ensemble.name, ensemble.director, ensemble.level)
-    # print(f"You selected: {num}\n {ensemble.name} \n Director: {ensemble.director} \n Level: {ensemble.level}")
 
     console = Console()
     console.print(table)
@@ -77,23 +76,32 @@ def add_ensemble():
     except Exception as exc:
         print("Uh-Oh: There has been a problem with adding your ensemble", exc)
 
-# find a way to make this case insensitive
 def find_ensemble_by_director():
-    name = input("Type the director's name: ")
+    name = input("Type the director's name (Include first and last name and titlecase ex: Will Cooley): ")
     ensemble = Ensemble.find_by_director(name)
     if ensemble:
         print(f"{ensemble.director} is the director of {ensemble.name}")
     else:
         print('director not found')
 
-# this currently only finds just the first instance that matches the level but not all
 def find_ensemble_by_level():
     level = input("Type the level of the ensemble: ")
-    ensemble = Ensemble.find_by_level(level)
-    if ensemble:
-        print(f"{ensemble.name} is {ensemble.level}")
-    else:
-        print('no ensembles match the entered level')
+    ensembles = Ensemble.find_by_level(level)
+
+    table = Table(title=f'Ensembles by Level: {level}')
+    table.add_column(" ")
+    table.add_column("Name", style='cyan')
+    table.add_column("Director", style='magenta')
+    for i, ensemble in enumerate(ensembles, start=1):
+        table.add_row(str(i), ensemble.name, ensemble.director)
+
+    console = Console()
+    console.print(table)
+
+    # if ensemble:
+    #     print(f"{ensemble.name} is {ensemble.level}")
+    # else:
+    #     print('no ensembles match the entered level')
 
 def view_ensemble_musicians(num):
     ensemble = Ensemble.find_by_id(num)
@@ -163,7 +171,6 @@ def find_musician_by_name():
         console.print(f"{name} was not found", style='error')
 
 def view_musicians_by_instrument():
-    pass
     instrument_select = input("Type an instrument: ")
     instrument = Musician.find_by_instrument(instrument_select)
     for i, musician in enumerate(instrument, start=1):

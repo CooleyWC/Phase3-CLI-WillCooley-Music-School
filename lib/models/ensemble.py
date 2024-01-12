@@ -161,6 +161,7 @@ class Ensemble:
         row = CURSOR.execute(sql, (director, )).fetchone()
         return cls.instance_from_db(row) if row else None
     
+    # check this
     @classmethod
     def find_by_level(cls, level):
         sql = """
@@ -169,8 +170,8 @@ class Ensemble:
             WHERE level is ?
         """
 
-        row = CURSOR.execute(sql, (level, )).fetchone()
-        return cls.instance_from_db(row) if row else None
+        rows = CURSOR.execute(sql, (level, )).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
     
     def musicians(self):
         from models.musician import Musician
