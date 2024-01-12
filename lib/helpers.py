@@ -2,15 +2,21 @@
 from models.ensemble import Ensemble
 from models.musician import Musician
 
+
 from rich.console import Console
 from rich.table import Table
 
 # table = Table(title='All Musicians')
 
 def list_ensembles():
+    table = Table(title = 'All Ensembles')
     ensembles = Ensemble.get_all()
+    table.add_column(' ')
+    table.add_column('Ensemble', style='deep_sky_blue1')
     for i, ensemble in enumerate(ensembles, start=1):
-        print(i, ensemble.name)
+        table.add_row(str(i), ensemble.name)
+    console = Console()
+    console.print(table)
 
 # why do i not need to subtract the number by one?
 def view_ensemble(num):
