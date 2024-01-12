@@ -203,7 +203,5 @@ class Musician:
             FROM musicians
             WHERE instrument is ?
         """ 
-        # row = CURSOR.execute(sql, (instrument,)).fetchone()
-        # return cls.instance_from_db(row) if row else None
         rows = CURSOR.execute(sql, (instrument,)).fetchall()
         return [cls.instance_from_db(row) for row in rows]
