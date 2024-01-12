@@ -99,7 +99,7 @@ def list_musicians():
 
     console = Console()
     console.print(table)
-    
+
 def add_musician():
     name = input("Type the new musician's name: ")
     instrument = input("Type the new musician's instrument: ")
@@ -116,11 +116,20 @@ def add_musician():
 def find_musician_by_name():
     name = input("Type the musician's name: ")
     musician = Musician.find_by_name(name)
+
+    table = Table(title='Musician Details')
+    table.add_column("Name", justify='right', style='cyan', no_wrap=True)
+    table.add_column("Instrument", style="magenta")
+    table.add_column("Age")
+    table.add_column('Audition Score')
+    table.add_column('Enrolled in Private Lessons')
     if musician:
         print(f"{musician.name} is enrolled, he plays the {musician.instrument}. Would you like to see more details?")
         answer = input("Type yes or no: ")
         if answer == 'yes':
-            print(f"Extra details about {musician.name}\n Age: {musician.age}, Audition Score: {musician.audition_score}, Enrolled in private lessons?: {musician.private_lessons}, Id of ensemble the musician plays in: {musician.ensemble_id}")
+            table.add_row(musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons)
+            console = Console()
+            console.print(table)
         else:
             print('okay')
     else:
