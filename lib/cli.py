@@ -68,7 +68,7 @@ def ensembles():
             print('Invalid Choice')
 
 def ensembles_menu():
-    print("Type the number of the Ensemble to view its details")
+    console.print("Type the number of the Ensemble to view its details", style='medium_orchid3 underline')
     print("Type A or a to add a new ensemble")
     print("Type Dir or dir to find an ensemble by director")
     print("Type L or l to find an ensemble by level")
