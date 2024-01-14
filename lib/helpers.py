@@ -68,24 +68,27 @@ def exit_program():
     exit()
 
 def add_ensemble():
+    console = Console(theme=custom_theme)
     name = input("Enter the new ensemble's name: ")
     director = input("Enter the new ensemble's director: ")
     level = input("Enter the ensembles level (beginniner, intermediate, or advanced): ")
     try:
         ensemble = Ensemble.create(name, director, level)
-        print(f"Success: {ensemble.name} has been added")
+        console.print(f"Success: {ensemble.name} has been added", style='success')
     except Exception as exc:
-        print("Uh-Oh: There has been a problem with adding your ensemble", exc)
+        console.print("Uh-Oh: There has been a problem with adding your ensemble", exc, style='error')
 
 def find_ensemble_by_director():
+    console = Console(theme=custom_theme)
     name = input("Type the director's name (Include first and last name and titlecase ex: Will Cooley): ")
     ensemble = Ensemble.find_by_director(name)
     if ensemble:
-        print(f"{ensemble.director} is the director of {ensemble.name}")
+        console.print(f"{ensemble.director} is the director of {ensemble.name}", style='success')
     else:
-        print('director not found')
+        console.print(f'Uh oh: {name} was not found', style='error')
 
 def find_ensemble_by_level():
+    console = Console(theme=custom_theme)
     level = input("Type the level of the ensemble: ")
     ensembles = Ensemble.find_by_level(level)
 
@@ -93,11 +96,19 @@ def find_ensemble_by_level():
     table.add_column(" ")
     table.add_column("Name", style='cyan')
     table.add_column("Director", style='magenta')
-    for i, ensemble in enumerate(ensembles, start=1):
-        table.add_row(str(i), ensemble.name, ensemble.director)
 
-    console = Console()
-    console.print(table)
+    if ensembles:
+        for i, ensemble in enumerate(ensembles, start=1):
+            table.add_row(str(i), ensemble.name, ensemble.director)
+        console.print(table)
+    else:
+        console.print(f'Uh oh - No ensembles found matching {level}', style='error')
+
+    # for i, ensemble in enumerate(ensembles, start=1):
+    #     table.add_row(str(i), ensemble.name, ensemble.director)
+
+    # console = Console()
+    # console.print(table)
 
 def view_ensemble_musicians(num):
     ensemble = Ensemble.find_by_id(num)
