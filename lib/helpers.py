@@ -170,11 +170,21 @@ def find_musician_by_name():
 
 def view_musicians_by_instrument():
     instrument_select = input("Type an instrument: ")
+    table = Table(title='Musicians by Instrument')
+    table.add_column("")
+    table.add_column("Name", style='cyan')
+    table.add_column("Instrument", style='magenta')
     instrument = Musician.find_by_instrument(instrument_select)
     for i, musician in enumerate(instrument, start=1):
-        print(f"{i} Name: {musician.name}, Instrument: {musician.instrument}")
+        table.add_row(str(i), musician.name, musician.instrument)
+
     else:
         if not instrument:
             console.print(f'Uh oh - it appears we do not have any {instrument_select} players here', style='error')
+
+    console = Console()
+    console.print(table)
+
+
 
 
