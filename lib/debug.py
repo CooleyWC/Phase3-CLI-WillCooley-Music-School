@@ -34,7 +34,7 @@ def reset_database():
     Musician.create('Red Garland', 'piano', 19, 56, 'yes', jazz_combo_1.id)
     Musician.create('Chris Lamb', 'drums', 34, 78, 'yes', chamber_ensemble_2.id)
     Musician.create('Jack Johnson', 'trombone', 46, 87, 'yes', jazz_orchestra_3.id)
-    Musician.create('Chris Marton', 'trumpet', 44, 89, 'no', symphonic_winds.id)
+    Musician.create('Chris Martin', 'trumpet', 44, 89, 'no', symphonic_winds.id)
     Musician.create('Patsy Dash', 'drums', 78, 97, 'no', symphonic_winds.id)
 
 reset_database()

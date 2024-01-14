@@ -66,7 +66,7 @@ def ensembles():
         elif choice == "E" or choice == "e":
             exit_program()
         else:
-            print('Invalid Choice')
+            console.print("Invalid choice", style='error')
 
 def ensembles_menu():
     console.print("Type the number of the Ensemble to view its details", style='medium_orchid3 underline')
@@ -125,7 +125,7 @@ def musicians():
         elif choice == "E" or choice =="e":
             exit_program()
         else:
-            print('Invalid Choice')
+            console.print("Invalid choice", style='error')
 
 def musicians_menu():
     console.print("Musician Menu", style="bold underline cyan on black")
@@ -149,7 +149,7 @@ def musician_options():
         elif choice == "E" or choice =="e":
             exit_program()
         else:
-            print('Invalid Choice')    
+            console.print("Invalid choice", style='error')   
 
 def musician_options_menu():
     print("Type A or a to add a musician")
