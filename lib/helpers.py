@@ -169,6 +169,7 @@ def find_musician_by_name():
         console.print(f"{name} was not found", style='error')
 
 def view_musicians_by_instrument():
+    console = Console(theme=custom_theme)
     instrument_select = input("Type an instrument: ")
     table = Table(title='Musicians by Instrument')
     table.add_column("")
@@ -182,7 +183,7 @@ def view_musicians_by_instrument():
         if not instrument:
             console.print(f'Uh oh - it appears we do not have any {instrument_select} players here', style='error')
 
-    console = Console()
+    # console = Console()
     console.print(table)
 
 def delete_musician():
