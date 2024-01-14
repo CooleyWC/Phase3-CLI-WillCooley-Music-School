@@ -183,13 +183,12 @@ def view_musicians_by_instrument():
     instrument = Musician.find_by_instrument(instrument_select)
     for i, musician in enumerate(instrument, start=1):
         table.add_row(str(i), musician.name, musician.instrument)
+        console.print(table)
 
     else:
         if not instrument:
             console.print(f'Uh oh - it appears we do not have any {instrument_select} players here', style='error')
 
-    # console = Console()
-    console.print(table)
 
 def delete_musician():
     id_ = input("Enter the musician's number from the list: ")
