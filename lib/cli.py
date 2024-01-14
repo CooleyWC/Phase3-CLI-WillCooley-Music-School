@@ -140,7 +140,7 @@ def musician_options():
         musician_options_menu()
         choice = input("> ")
         if choice == "A" or choice == "a":
-            add_musician
+            add_musician()
         elif choice == "D" or choice == "d":
             delete_musician()
             list_musicians()
