@@ -48,7 +48,7 @@ def update_ensemble(num):
             ensemble.level = level
 
             ensemble.update()
-            print(f"{ensemble.name} was successfully updated")
+            console.print(f"{ensemble.name} was successfully updated", style='success')
         except Exception as exc:
             console.print(f"Error updating Ensemble", exc, style='error')
     else:
