@@ -171,7 +171,7 @@ def find_musician_by_name():
         else:
             console.print('okay', style='success')
     else:
-        console.print(f"{name} was not found", style='error')
+        console.print(f"Uh oh - {name} was not found", style='error')
 
 def view_musicians_by_instrument():
     console = Console(theme=custom_theme)
