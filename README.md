@@ -38,6 +38,8 @@
 
 ![display-filter](/Photos/Main_Menu.png)
 
+### Main Options
+
 - Direct to ensembles menu
 - Direct to musicians menu
 
@@ -47,6 +49,9 @@
 
 ![display-filter](/Photos/Ensemble_Menu.png)
 
+### Ensemble Options
+
+- View all ensembles
 - Add a new ensemble
 - Find an ensemble by director
 - Find an ensemble by level
@@ -56,6 +61,8 @@
 ## Sub Ensemble Menu
 
 ![display-filter](/Photos/Sub_Ensemble_Menu.png)
+
+### Sub Ensemble Options
 
 - Update an ensemble
 - Delete an ensemble
@@ -67,7 +74,25 @@
 
 ![display-filter](/Photos/Musician_Menu.png)
 
+### Musician Options
+
 - View all musicians
-- Add a musician
 - Find a musician by name
 - View musicians by instrument
+
+---
+
+## Sub Musicians Menu
+
+![display-filter](/Photos/Sub_Musician_Menu.png)
+
+### Sub Musician Options
+
+- Add a musician
+- Delete a musician
+
+---
+
+## Support
+
+If you have any questions, you can find me on Discord: cooleywc

@@ -130,7 +130,6 @@ def musicians():
 def musicians_menu():
     console.print("Musician Menu", style="bold underline cyan on black")
     print("Type V or v to view all enrolled musicians")
-    print("Type A or a to add a musician")
     print("Type N or n to find a musician by name")
     print("Type I or i to view the musicians that play a particular instrument")
     print("Type B or b to go back to ensemble menu")
