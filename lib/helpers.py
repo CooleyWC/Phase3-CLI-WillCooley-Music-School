@@ -145,6 +145,7 @@ def add_musician():
         console.print("Uh oh there was an error creating your musician", exc, style='error')
 
 def find_musician_by_name():
+    console = Console(theme=custom_theme)
     name = input("Type the musician's name (Include first and last name and titlecase ex: Will Cooley): ")
     musician = Musician.find_by_name(name)
 
@@ -156,7 +157,6 @@ def find_musician_by_name():
     table.add_column('Enrolled in Private Lessons')
     if musician:
         musician_style_name = Style(color='cyan', bold=True)
-        console = Console(theme=custom_theme)
         console.print(f"[{musician_style_name}]{musician.name}[/] is enrolled, he plays the {musician.instrument}. Would you like to see more details?")
         answer = input("Type yes or no: ")
         if answer == 'yes':
