@@ -58,9 +58,9 @@ def delete_ensemble(num):
     id_ = num
     if ensemble := Ensemble.find_by_id(id_):
         ensemble.delete()
-        console.print(f"Ensemble {id_} was successfully deleted.", style='success')
+        console.print(f"Ensemble: {ensemble.name} was successfully deleted.", style='success')
     else:
-        print(f"Error: check that you selected a correct number corresponding to an ensemble")
+        console.print(f"Error: check that you selected a correct number corresponding to an ensemble", style='error')
 
 
 def exit_program():
@@ -120,7 +120,7 @@ def list_musicians():
     musicians = Musician.get_all()
     table = Table(title='All Musicians')
     table.add_column("number")
-    table.add_column("Name", justify='right', style='cyan', no_wrap=True)
+    table.add_column("Name", justify='left', style='cyan', no_wrap=True)
     table.add_column("Instrument", style="magenta")
     table.add_column("Age")
     table.add_column('Audition Score')
@@ -184,6 +184,16 @@ def view_musicians_by_instrument():
 
     console = Console()
     console.print(table)
+
+def delete_musician():
+    id_ = input("Enter the musician's number from the list: ")
+    if musician := Musician.find_by_id(id_):
+        musician.delete()
+        console.print(f"Musician: {musician.name} was successfully deleted.", style='success')
+    else:
+        console.print('There was an error deleting the selected musician', style='error')
+
+    
 
 
 

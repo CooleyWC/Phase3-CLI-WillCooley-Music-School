@@ -19,7 +19,8 @@ from helpers import (
     list_musicians,
     add_musician,
     find_musician_by_name,
-    view_musicians_by_instrument
+    view_musicians_by_instrument,
+    delete_musician
 )
 
 
@@ -112,6 +113,7 @@ def musicians():
         choice = input("> ")
         if choice == "V" or choice == "v":
             list_musicians()
+            musician_options()
         elif choice == "A" or choice == "a":
             add_musician()
         elif choice == "N" or choice == "n":
@@ -131,6 +133,28 @@ def musicians_menu():
     print("Type A or a to add a musician")
     print("Type N or n to find a musician by name")
     print("Type I or i to view the musicians that play a particular instrument")
+    print("Type B or b to go back to ensemble menu")
+    print("Type E or e to exit the program")
+
+def musician_options():
+    while True:
+        musician_options_menu()
+        choice = input("> ")
+        if choice == "A" or choice == "a":
+            add_musician
+        elif choice == "D" or choice == "d":
+            delete_musician()
+            list_musicians()
+        elif choice == "B" or choice == "b":
+            break
+        elif choice == "E" or choice =="e":
+            exit_program()
+        else:
+            print('Invalid Choice')    
+
+def musician_options_menu():
+    print("Type A or a to add a musician")
+    print("Type D or d to delete a musician (Please remember the musician's number)")
     print("Type B or b to go back to ensemble menu")
     print("Type E or e to exit the program")
 
