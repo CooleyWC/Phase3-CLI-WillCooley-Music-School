@@ -104,12 +104,6 @@ def find_ensemble_by_level():
     else:
         console.print(f'Uh oh - No ensembles found matching {level}', style='error')
 
-    # for i, ensemble in enumerate(ensembles, start=1):
-    #     table.add_row(str(i), ensemble.name, ensemble.director)
-
-    # console = Console()
-    # console.print(table)
-
 def view_ensemble_musicians(num):
     ensemble = Ensemble.find_by_id(num)
     table = Table(title='Musicians')
@@ -145,12 +139,12 @@ def list_musicians():
 def add_musician():
     name = input("Type the new musician's name: ")
     instrument = input("Type the new musician's instrument: ")
-    age = int(input("Type the musician's age: "))
-    audition_score = int(input("Type the musician's audition_score: "))
+    age = (input("Type the musician's age: "))
+    audition_score = (input("Type the musician's audition_score: "))
     private_lessons = input("Is the musician in enrolled in private lessons? (yes or no): ")
-    ensemble_id = int(input("Enter the id of the ensemble the musician was placed in: "))
+    ensemble_id = (input("Enter the id of the ensemble the musician was placed in: "))
     try:
-        musician = Musician.create(name, instrument, age, audition_score, private_lessons, ensemble_id)
+        musician = Musician.create(name, instrument, int(age), int(audition_score), private_lessons, int(ensemble_id))
         console.print(f"Success: {musician.name} was successfully created", style='success')
     except Exception as exc:
         console.print("Uh oh there was an error creating your musician", exc, style='error')
