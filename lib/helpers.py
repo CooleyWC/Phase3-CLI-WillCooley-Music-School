@@ -29,16 +29,20 @@ def view_ensemble(num):
     table.add_column("Director", style='medium_orchid')
     table.add_column("Level")
 
-    id_ = num
-    ensemble = Ensemble.find_by_id(id_)
+    all_ensembles = Ensemble.get_all()
+    ensemble = all_ensembles[num-1]
+    # id_ = num
+    # ensemble = Ensemble.find_by_id(id_)
     table.add_row(str(num), ensemble.name, ensemble.director, ensemble.level)
 
     console = Console()
     console.print(table)
 
 def update_ensemble(num):
-    id_ = num
-    if ensemble := Ensemble.find_by_id(id_):
+    all_ensembles = Ensemble.get_all()
+    ensemble = all_ensembles[num-1]
+    # id_ = num
+    if ensemble:
         try:
             name = input("Enter the ensemble's new name: ")
             ensemble.name = name
@@ -55,8 +59,9 @@ def update_ensemble(num):
         console.print("Invalid number selection", style='error')
 
 def delete_ensemble(num):
-    id_ = num
-    if ensemble := Ensemble.find_by_id(id_):
+    all_ensembles = Ensemble.get_all()
+    ensemble = all_ensembles[num-1]
+    if ensemble:
         ensemble.delete()
         console.print(f"Ensemble: {ensemble.name} was successfully deleted.", style='success')
     else:
