@@ -89,7 +89,7 @@ def find_ensemble_by_director():
 
 def find_ensemble_by_level():
     console = Console(theme=custom_theme)
-    level = input("Type the level of the ensemble: ")
+    level = input("Type the level of the ensemble (must be either beginner, intermediate, or advanced): ")
     ensembles = Ensemble.find_by_level(level)
 
     table = Table(title=f'Ensembles by Level: {level}')
