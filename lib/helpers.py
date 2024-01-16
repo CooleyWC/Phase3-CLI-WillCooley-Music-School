@@ -110,7 +110,9 @@ def find_ensemble_by_level():
         console.print(f'Uh oh - No ensembles found matching {level}', style='error')
 
 def view_ensemble_musicians(num):
-    ensemble = Ensemble.find_by_id(num)
+    # ensemble = Ensemble.find_by_id(num)
+    all_ensembles = Ensemble.get_all()
+    ensemble = all_ensembles[num-1]
     table = Table(title='Musicians')
     table.add_column(" ")
     table.add_column("Name", justify='left', style='cyan', no_wrap=True)
