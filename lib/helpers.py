@@ -82,7 +82,7 @@ def add_ensemble():
     console = Console(theme=custom_theme)
     name = input("Enter the new ensemble's name: ")
     director = input("Enter the new ensemble's director: ")
-    level = input("Enter the ensembles level (beginniner, intermediate, or advanced): ")
+    level = input("Enter the ensembles level (beginner, intermediate, or advanced): ")
     try:
         ensemble = Ensemble.create(name, director, level)
         console.print(f"Success: {ensemble.name} has been added", style='success')

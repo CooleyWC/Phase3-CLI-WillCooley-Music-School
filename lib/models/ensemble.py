@@ -22,7 +22,7 @@ class Ensemble:
         if isinstance(name, str) and 4 <= len(name) <= 25:
             self._name = name
         else:
-            raise ValueError('must be a string and between 4 and 25 characters')
+            raise ValueError('name must be a string and between 4 and 25 characters')
         
     @property
     def director(self):
@@ -33,7 +33,7 @@ class Ensemble:
         if isinstance(director, str) and 2 <= len(director) <= 20:
             self._director = director
         else:
-            raise ValueError('must be a string and between 2 and 20 characters')
+            raise ValueError('director must be a string and between 2 and 20 characters')
         
     @property
     def level(self):
@@ -42,9 +42,9 @@ class Ensemble:
     @level.setter
     def level(self, level):
         if type(level) != str:
-            raise ValueError('needs to be a string')
+            raise ValueError('level needs to be a string')
         elif level not in Ensemble.ENSEMBLE_LEVELS:
-            raise ValueError('needs to be an acceptable ensemble level')
+            raise ValueError('level needs to be an acceptable ensemble level')
         else:
             self._level = level
         
