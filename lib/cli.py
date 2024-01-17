@@ -51,23 +51,33 @@ def ensembles():
     while True:
         ensembles_menu()
         choice = input("> ")
-        if choice.isdigit():
-            selected_ensemble = int(choice)
-            view_ensemble(selected_ensemble)
-            ensemble_options(selected_ensemble)
-        elif choice == "A" or choice == "a":
-            add_ensemble()
-        elif choice == "Dir" or choice == "dir":
-            find_ensemble_by_director()
+        try: 
+            if choice.isdigit():
+                selected_ensemble = int(choice)
+                view_ensemble(selected_ensemble)
+                ensemble_options(selected_ensemble)
+            elif choice == "A" or choice == "a":
+                add_ensemble()
+                list_ensembles()
+            elif choice == "Dir" or choice == "dir":
+                find_ensemble_by_director()
+                list_ensembles()
+            elif choice == "L" or choice == "l":
+                find_ensemble_by_level()   
+                list_ensembles() 
+            elif choice == "B" or choice == "b":
+                break
+            elif choice == "E" or choice == "e":
+                exit_program()
+            else:
+                console.print("Invalid choice", style='error')
+                list_ensembles()
+                ensembles()
+        except Exception:
+            console.print('Invalid choice - taking you back to the ensembles menu', style='error')
             list_ensembles()
-        elif choice == "L" or choice == "l":
-            find_ensemble_by_level()    
-        elif choice == "B" or choice == "b":
-            break
-        elif choice == "E" or choice == "e":
-            exit_program()
-        else:
-            console.print("Invalid choice", style='error')
+            ensembles()
+
 
 def ensembles_menu():
     console.print("Type the number of the Ensemble to view its details", style='medium_orchid3 underline')
