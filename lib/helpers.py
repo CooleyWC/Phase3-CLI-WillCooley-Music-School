@@ -231,8 +231,9 @@ def delete_musician():
         confirm = input("Are you sure you want to delete this musician (yes or no)?: ")
         if confirm == 'yes':
             selected_musician.delete()
-            console.print(f"Musician: {selected_musician.name} was successfully deleted.", style='success')
+            console.print(f"{selected_musician.name} was successfully deleted.", style='success')
         else:
+            console.print(f"{selected_musician.name} was NOT deleted")
             return
     else:
         console.print('There was an error deleting the selected musician', style='error')
