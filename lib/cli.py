@@ -102,6 +102,8 @@ def ensemble_options(selected_ensemble):
         
 
 def ensemble_options_menu():
+    print("Type U or u to update this ensemble")
+    print("Type D or d to delete this ensemble")
     print("Type V or v to view this ensemble's musicians")
     print("Type B or b to go back to ensemble menu")
     print("Type E or e to exit the program")

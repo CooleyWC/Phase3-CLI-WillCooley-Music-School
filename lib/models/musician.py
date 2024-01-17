@@ -129,7 +129,7 @@ class Musician:
             SET name = ?, instrument = ?, age = ?, audition_score = ?, private_lessons = ?, ensemble_id = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.name, self.instrument, self.age, self.audition_score, self.private_lessons, self.ensemble_id))
+        CURSOR.execute(sql, (self.name, self.instrument, self.age, self.audition_score, self.private_lessons, self.ensemble_id, self.id))
         CONN.commit()
 
     def delete(self):
