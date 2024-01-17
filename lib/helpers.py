@@ -21,7 +21,7 @@ def list_ensembles():
     console = Console()
     console.print(table)
 
-
+# if a user types an invalid number then types anything other than b or e, the program breaks.
 def view_ensemble(num):
     console = Console(theme=custom_theme)
     all_ensembles = Ensemble.get_all()
@@ -164,9 +164,9 @@ def add_musician():
             musician = Musician.create(name, instrument, int(age), int(audition_score), private_lessons, int(found_ensemble.id))
             console.print(f"Success: {musician.name} was successfully created", style='success')
         except Exception as exc:
-            console.print("Uh oh there was an error creating your musician", exc, style='error')
+            console.print("Uh oh: There was an error creating your musician", exc, style='error')
     else:
-        raise Exception('There was an error finding your musicians ensemble')
+        console.print('Uh oh: There was an error creating your musician', style='error')
 
 
 def find_musician_by_name():
