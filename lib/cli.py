@@ -20,7 +20,8 @@ from helpers import (
     add_musician,
     find_musician_by_name,
     view_musicians_by_instrument,
-    delete_musician
+    delete_musician,
+    update_musician
 )
 
 
@@ -88,9 +89,9 @@ def ensemble_options(selected_ensemble):
             delete_ensemble(selected_ensemble)
             list_ensembles()
             break
-        elif choice == "V" or choice == "v":
+        if choice == "V" or choice == "v":
             view_ensemble_musicians(selected_ensemble)
-
+            musicians_in_ensemble(selected_ensemble)
         elif choice == "B" or choice ==  "b":
             list_ensembles()
             break
@@ -101,9 +102,35 @@ def ensemble_options(selected_ensemble):
         
 
 def ensemble_options_menu():
-    print("Type U or u to update this ensemble")
-    print("Type D or d to delete this ensemble")
     print("Type V or v to view this ensemble's musicians")
+    print("Type B or b to go back to ensemble menu")
+    print("Type E or e to exit the program")
+
+def musicians_in_ensemble(selected_ensemble):
+    while True:
+        musicians_in_ensemble_menu()
+        choice = input("> ")
+        if choice == "A" or choice == "a":
+            add_musician()
+            view_ensemble_musicians(selected_ensemble)
+        elif choice == "U" or choice == "u":
+            update_musician()
+        elif choice == "D" or choice == "d":
+            delete_musician()
+            list_musicians()
+        elif choice == "B" or choice == "b":
+            list_ensembles()
+            ensembles()
+            break
+        elif choice == "E" or choice =="e":
+            exit_program()
+        else:
+            console.print("Invalid choice", style='error')
+
+def musicians_in_ensemble_menu():
+    print("Type A or a to add a musician ")
+    print("Type U or u to update a musician")
+    print("Type D or d to delete a musician")
     print("Type B or b to go back to ensemble menu")
     print("Type E or e to exit the program")
 
