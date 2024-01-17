@@ -143,18 +143,36 @@ def list_musicians():
     console = Console()
     console.print(table)
 
-def add_musician():
+def add_musician(num=None):
     name = input("Type the new musician's name: ")
     instrument = input("Type the new musician's instrument: ")
     age = (input("Type the musician's age: "))
     audition_score = (input("Type the musician's audition_score: "))
     private_lessons = input("Is the musician in enrolled in private lessons? (yes or no): ")
-    ensemble_id = (input("Enter the id of the ensemble the musician was placed in: "))
-    try:
-        musician = Musician.create(name, instrument, int(age), int(audition_score), private_lessons, int(ensemble_id))
-        console.print(f"Success: {musician.name} was successfully created", style='success')
-    except Exception as exc:
-        console.print("Uh oh there was an error creating your musician", exc, style='error')
+    ensemble_name = input("Type the name of the ensemble the musician is placed in: ")
+    found_ensemble = Ensemble.find_by_name(ensemble_name)
+    
+    
+    # if not num:
+    #     ensemble_name = (input("Enter the name of the ensemble the musician was placed in: "))
+    #     ensemble = Ensemble.find_by_name(ensemble_name)
+    # else:
+    #     ensemble = all_ensembles[num-1]
+
+    if found_ensemble:
+        try:
+            musician = Musician.create(name, instrument, int(age), int(audition_score), private_lessons, int(found_ensemble.id))
+            console.print(f"Success: {musician.name} was successfully created", style='success')
+        except Exception as exc:
+            console.print("Uh oh there was an error creating your musician", exc, style='error')
+    else:
+        raise Exception('There was an error finding your musicians ensemble')
+    
+    # try:
+    #     musician = Musician.create(name, instrument, int(age), int(audition_score), private_lessons, ensemble.id)
+    #     console.print(f"Success: {musician.name} was successfully created", style='success')
+    # except Exception as exc:
+    #     console.print("Uh oh there was an error creating your musician", exc, style='error')
 
 def find_musician_by_name():
     console = Console(theme=custom_theme)
@@ -205,7 +223,8 @@ def delete_musician():
     else:
         console.print('There was an error deleting the selected musician', style='error')
 
-    
+def update_musician():
+    pass    
 
 
 
