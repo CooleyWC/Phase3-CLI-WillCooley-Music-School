@@ -25,7 +25,7 @@ class Musician:
     
     @name.setter
     def name(self, name):
-        if isinstance(name, str) and 2 <= len(name) <= 20:
+        if isinstance(name, str) and 2 < len(name) <= 20:
             self._name = name
         else: 
             raise ValueError('name must be a non-empty string greater than 2 and less than 20')
