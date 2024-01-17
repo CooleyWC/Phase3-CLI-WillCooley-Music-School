@@ -201,14 +201,13 @@ def view_musicians_by_instrument():
     table.add_column("Name", style='cyan')
     table.add_column("Instrument", style='magenta')
     instrument = Musician.find_by_instrument(instrument_select)
-    for i, musician in enumerate(instrument, start=1):
-        table.add_row(str(i), musician.name, musician.instrument)
+    if instrument:
+        for i, musician in enumerate(instrument, start=1):
+            table.add_row(str(i), musician.name, musician.instrument)
         console.print(table)
-
     else:
-        if not instrument:
-            console.print(f'Uh oh - it appears we do not have any {instrument_select} players here', style='error')
-
+        console.print(f'Uh oh - it appears we do not have any {instrument_select} players here', style='error')
+    # console.print(table)
 
 def delete_musician():
     name = input("Enter the musician's name (First and Last and Titlecased): ")
