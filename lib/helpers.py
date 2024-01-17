@@ -47,7 +47,7 @@ def view_ensemble(num):
 def update_ensemble(num):
     all_ensembles = Ensemble.get_all()
     ensemble = all_ensembles[num-1]
-    # id_ = num
+
     if ensemble:
         try:
             name = input("Enter the ensemble's new name: ")
@@ -116,9 +116,9 @@ def find_ensemble_by_level():
         console.print(f'Uh oh - No ensembles found matching {level}', style='error')
 
 def view_ensemble_musicians(num):
-    # ensemble = Ensemble.find_by_id(num)
     all_ensembles = Ensemble.get_all()
     ensemble = all_ensembles[num-1]
+
     table = Table(title='Musicians')
     table.add_column(" ")
     table.add_column("Name", justify='left', style='cyan', no_wrap=True)
@@ -126,6 +126,7 @@ def view_ensemble_musicians(num):
     table.add_column("Age")
     table.add_column('Audition Score')
     table.add_column('Enrolled in Private Lessons')
+
     if ensemble:
         print(f"{ensemble.name}")
         ensemble_musicians = ensemble.musicians()
@@ -212,7 +213,7 @@ def view_musicians_by_instrument():
 def delete_musician():
     name = input("Enter the musician's name (First and Last and Titlecased): ")
     selected_musician = Musician.find_by_name(name)
-    # id_ = Musician.find_by_id(selected_musician.id)
+    
     if selected_musician:
         confirm = input("Are you sure you want to delete this musician (yes or no)?: ")
         if confirm == 'yes':
@@ -220,14 +221,37 @@ def delete_musician():
             console.print(f"Musician: {selected_musician.name} was successfully deleted.", style='success')
         else:
             return
-    # if musician := Musician.find_by_id(id_):
-    #     musician.delete()
-    #     console.print(f"Musician: {musician.name} was successfully deleted.", style='success')
     else:
         console.print('There was an error deleting the selected musician', style='error')
 
 def update_musician():
-    pass    
+    console = Console(theme=custom_theme)
+    name = input("Confirm the name of the musician you would like to update (First and Last and Titlecased): ")
+    musician = Musician.find_by_name(name)
+
+    if musician:
+        try:
+            name = input("Type the musician's updated name: ")
+            musician.name = name
+            instrument = input("Type the musician's instrument: ")
+            musician.instrument = instrument
+            age = input("Type the musician's age: ")
+            musician.age = int(age)
+            audition_score = input("Type the musician's audition score: ")
+            musician.audition_score = int(audition_score)
+            private_lessons = input("Is the musician in enrolled in private lessons? (yes or no): ")
+            musician.private_lessons = private_lessons
+            ensemble = input("Type the name of the ensemble the musician is placed in: ")
+            found_ensemble = Ensemble.find_by_name(ensemble)
+            musician.ensemble_id = int(found_ensemble.id)
+
+            musician.update()
+            console.print(f"{musician.name} was successfully updated.", style='success')
+        except Exception as exc:
+            console.print(f"Error updating musician", exc)
+    else:
+        console.print("There was an error confirming your musician - double check spelling and capitalization", style='error')
+
 
 
 
