@@ -143,13 +143,13 @@ def list_musicians():
     console = Console()
     console.print(table)
 
-def add_musician(num=None):
+def add_musician():
     name = input("Type the new musician's name: ")
     instrument = input("Type the new musician's instrument: ")
     age = (input("Type the musician's age: "))
     audition_score = (input("Type the musician's audition_score: "))
     private_lessons = input("Is the musician in enrolled in private lessons? (yes or no): ")
-    ensemble_name = input("Type the name of the ensemble the musician is placed in: ")
+    ensemble_name = input("Confirm the ensemble placement by typing the name of the ensemble the musician is placed in: ")
     found_ensemble = Ensemble.find_by_name(ensemble_name)
     
     
