@@ -21,22 +21,28 @@ def list_ensembles():
     console = Console()
     console.print(table)
 
-# why do i not need to subtract the number by one?
+
 def view_ensemble(num):
+    console = Console(theme=custom_theme)
+    all_ensembles = Ensemble.get_all()
+
+    if not 1 <= num <= len(all_ensembles):
+        console.print("Invalid Choice. Enter a valid number corresponding to one of the ensembles.", style='error')
+        return
+
     table = Table(title='Ensemble Details')
     table.add_column(" ")
     table.add_column("Name", style='cyan')
     table.add_column("Director", style='medium_orchid')
     table.add_column("Level")
 
-    all_ensembles = Ensemble.get_all()
     ensemble = all_ensembles[num-1]
-    # id_ = num
-    # ensemble = Ensemble.find_by_id(id_)
-    table.add_row(str(num), ensemble.name, ensemble.director, ensemble.level)
+    if ensemble: 
+        table.add_row(str(num), ensemble.name, ensemble.director, ensemble.level)
+        console.print(table)
+    else:
+        console.print("Invalid choice", style='error')
 
-    console = Console()
-    console.print(table)
 
 def update_ensemble(num):
     all_ensembles = Ensemble.get_all()
