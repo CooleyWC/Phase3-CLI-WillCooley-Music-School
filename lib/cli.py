@@ -144,7 +144,7 @@ def musicians_in_ensemble_menu():
     print("Type A or a to add a musician ")
     print("Type U or u to update a musician")
     print("Type D or d to delete a musician")
-    print("Type B or b to go back to ensemble menu")
+    print("Type B or b to go back to musician menu")
     print("Type E or e to exit the program")
 
 def musicians():
@@ -172,7 +172,7 @@ def musicians_menu():
     print("Type V or v to view all enrolled musicians")
     print("Type N or n to find a musician by name")
     print("Type I or i to view the musicians that play a particular instrument")
-    print("Type B or b to go back to ensemble menu")
+    print("Type B or b to go back to main menu")
     print("Type E or e to exit the program")
 
 def musician_options():
@@ -194,7 +194,7 @@ def musician_options():
 def musician_options_menu():
     print("Type A or a to add a musician")
     print("Type D or d to delete a musician")
-    print("Type B or b to go back to ensemble menu")
+    print("Type B or b to go back to musician menu")
     print("Type E or e to exit the program")
 
 

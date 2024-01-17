@@ -135,16 +135,28 @@ def view_ensemble_musicians(num):
     console.print(table)
 
 def list_musicians():
-    musicians = Musician.get_all()
     table = Table(title='All Musicians')
     table.add_column("number")
     table.add_column("Name", justify='left', style='cyan', no_wrap=True)
     table.add_column("Instrument", style="magenta")
     table.add_column("Age")
     table.add_column('Audition Score')
-    table.add_column('Enrolled in Private Lessons')
+    table.add_column('Private Lessons?')
+    table.add_column('Ensemble placement', style='green4')
+
+    musicians = Musician.get_all()
+    all_ensembles = Ensemble.get_all()
+
+    ensemble_name_dict = {ensemble.id: ensemble.name for ensemble in all_ensembles}
+
     for i, musician in enumerate(musicians, start=1):
-        table.add_row(str(i), musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons)
+        ensemble_id = musician.ensemble_id
+        if ensemble_id in ensemble_name_dict:
+            ensemble_name = ensemble_name_dict[ensemble_id]
+        else:
+            ensemble_name = "Info Not Available"
+
+        table.add_row(str(i), musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons, ensemble_name)
 
     console = Console()
     console.print(table)
@@ -191,7 +203,7 @@ def find_musician_by_name():
             console = Console()
             console.print(table)
         else:
-            console.print('okay', style='success')
+            console.print('Okay - You typed something other than yes - back to Musician menu', style='success')
     else:
         console.print(f"Uh oh - {name} was not found", style='error')
 
