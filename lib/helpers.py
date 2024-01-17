@@ -27,7 +27,7 @@ def view_ensemble(num):
     all_ensembles = Ensemble.get_all()
 
     if not 1 <= num <= len(all_ensembles):
-        console.print("Invalid Choice. Enter a valid number corresponding to one of the ensembles.", style='error')
+        console.print("Invalid Choice. Must correspond to a ensemble number. Type B or b to try again.", style='error')
         return
 
     table = Table(title='Ensemble Details')
