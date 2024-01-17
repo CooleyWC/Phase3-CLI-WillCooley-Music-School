@@ -181,6 +181,10 @@ def musician_options():
         choice = input("> ")
         if choice == "A" or choice == "a":
             add_musician()
+            list_musicians()
+        elif choice == "U" or choice == "u":
+            update_musician()
+            list_musicians()
         elif choice == "D" or choice == "d":
             delete_musician()
             list_musicians()
@@ -193,6 +197,7 @@ def musician_options():
 
 def musician_options_menu():
     print("Type A or a to add a musician")
+    print("Type U or u to update a musician")
     print("Type D or d to delete a musician")
     print("Type B or b to go back to musician menu")
     print("Type E or e to exit the program")

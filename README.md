@@ -51,7 +51,8 @@
 
 ### Ensemble Options
 
-- View all ensembles
+- View an ensembles details
+  - Access to sub ensemble menu
 - Add a new ensemble
 - Find an ensemble by director
 - Find an ensemble by level
@@ -67,6 +68,7 @@
 - Update an ensemble
 - Delete an ensemble
 - View the ensemble's musicians
+  - Within this selection, you can add , update, or delete a musician.
 
 ---
 
@@ -77,6 +79,7 @@
 ### Musician Options
 
 - View all musicians
+  - Access to sub musicians menu
 - Find a musician by name
 - View musicians by instrument
 
