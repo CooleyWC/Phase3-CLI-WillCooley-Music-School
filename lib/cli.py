@@ -115,9 +115,10 @@ def musicians_in_ensemble(selected_ensemble):
             view_ensemble_musicians(selected_ensemble)
         elif choice == "U" or choice == "u":
             update_musician()
+            view_ensemble_musicians(selected_ensemble)
         elif choice == "D" or choice == "d":
             delete_musician()
-            list_musicians()
+            view_ensemble_musicians(selected_ensemble)
         elif choice == "B" or choice == "b":
             list_ensembles()
             ensembles()

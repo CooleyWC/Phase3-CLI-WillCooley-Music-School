@@ -157,13 +157,6 @@ def add_musician():
     private_lessons = input("Is the musician in enrolled in private lessons? (yes or no): ")
     ensemble_name = input("Confirm the ensemble placement by typing the name of the ensemble the musician is placed in: ")
     found_ensemble = Ensemble.find_by_name(ensemble_name)
-    
-    
-    # if not num:
-    #     ensemble_name = (input("Enter the name of the ensemble the musician was placed in: "))
-    #     ensemble = Ensemble.find_by_name(ensemble_name)
-    # else:
-    #     ensemble = all_ensembles[num-1]
 
     if found_ensemble:
         try:
@@ -173,12 +166,7 @@ def add_musician():
             console.print("Uh oh there was an error creating your musician", exc, style='error')
     else:
         raise Exception('There was an error finding your musicians ensemble')
-    
-    # try:
-    #     musician = Musician.create(name, instrument, int(age), int(audition_score), private_lessons, ensemble.id)
-    #     console.print(f"Success: {musician.name} was successfully created", style='success')
-    # except Exception as exc:
-    #     console.print("Uh oh there was an error creating your musician", exc, style='error')
+
 
 def find_musician_by_name():
     console = Console(theme=custom_theme)
@@ -222,10 +210,19 @@ def view_musicians_by_instrument():
 
 
 def delete_musician():
-    id_ = input("Enter the musician's number from the list: ")
-    if musician := Musician.find_by_id(id_):
-        musician.delete()
-        console.print(f"Musician: {musician.name} was successfully deleted.", style='success')
+    name = input("Enter the musician's name (First and Last and Titlecased): ")
+    selected_musician = Musician.find_by_name(name)
+    # id_ = Musician.find_by_id(selected_musician.id)
+    if selected_musician:
+        confirm = input("Are you sure you want to delete this musician (yes or no)?: ")
+        if confirm == 'yes':
+            selected_musician.delete()
+            console.print(f"Musician: {selected_musician.name} was successfully deleted.", style='success')
+        else:
+            return
+    # if musician := Musician.find_by_id(id_):
+    #     musician.delete()
+    #     console.print(f"Musician: {musician.name} was successfully deleted.", style='success')
     else:
         console.print('There was an error deleting the selected musician', style='error')
 
