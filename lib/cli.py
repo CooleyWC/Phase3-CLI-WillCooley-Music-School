@@ -183,7 +183,7 @@ def musician_options():
 
 def musician_options_menu():
     print("Type A or a to add a musician")
-    print("Type D or d to delete a musician (Please remember the musician's number)")
+    print("Type D or d to delete a musician")
     print("Type B or b to go back to ensemble menu")
     print("Type E or e to exit the program")
 
