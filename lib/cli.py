@@ -200,12 +200,5 @@ def musician_options_menu():
 
 
 
-
-    
-
-
-
-
-
 if __name__ == "__main__":
     main()

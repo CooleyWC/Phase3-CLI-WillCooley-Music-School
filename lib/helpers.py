@@ -21,7 +21,6 @@ def list_ensembles():
     console = Console()
     console.print(table)
 
-# if a user types an invalid number then types anything other than b or e, the program breaks.
 def view_ensemble(num):
     console = Console(theme=custom_theme)
     all_ensembles = Ensemble.get_all()
@@ -152,6 +151,9 @@ def list_musicians():
 
 def add_musician():
     name = input("Type the new musician's name: ")
+    if name.isdigit():
+        console.print('Invalid input: cannot be a number', style='error')
+        return
     instrument = input("Type the new musician's instrument: ")
     age = (input("Type the musician's age: "))
     audition_score = (input("Type the musician's audition_score: "))
