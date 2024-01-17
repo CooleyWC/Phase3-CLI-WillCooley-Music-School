@@ -207,7 +207,7 @@ def view_musicians_by_instrument():
         console.print(table)
     else:
         console.print(f'Uh oh - it appears we do not have any {instrument_select} players here', style='error')
-    # console.print(table)
+
 
 def delete_musician():
     name = input("Enter the musician's name (First and Last and Titlecased): ")
