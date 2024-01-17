@@ -67,8 +67,12 @@ def delete_ensemble(num):
     all_ensembles = Ensemble.get_all()
     ensemble = all_ensembles[num-1]
     if ensemble:
-        ensemble.delete()
-        console.print(f"Ensemble: {ensemble.name} was successfully deleted.", style='success')
+        confirm = input("Are you sure you want to delete this ensemble (yes or no)?: ")
+        if confirm == 'yes':
+            ensemble.delete()
+            console.print(f"{ensemble.name} was successfully deleted.", style='success')
+        else:
+            console.print(f"{ensemble.name} was not deleted")
     else:
         console.print(f"Error: check that you selected a correct number corresponding to an ensemble", style='error')
 

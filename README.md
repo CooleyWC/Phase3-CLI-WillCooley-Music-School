@@ -9,6 +9,7 @@
 - Fork and clone from https://github.com/CooleyWC/Phase3-project-Cooley
 - Run pipenv install and pipenv shell.
 - You may initialize the database with sample data (Ensembles and Musicians) by runnning: `python lib/seed.py`
+  - caution: running `python lib/seed.py` will reset all current user data.
 - Type: `python lib/cli.py` to begin the program.
 - Follow the prompts to interact with Will Cooley's Music School.
 
@@ -92,7 +93,14 @@
 ### Sub Musician Options
 
 - Add a musician
+- Update a musician
 - Delete a musician
+
+---
+
+## Ackowledgements
+
+Thanks to the rich library: https://github.com/Textualize/rich-cli
 
 ---
 
