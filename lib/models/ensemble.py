@@ -100,7 +100,16 @@ class Ensemble:
             WHERE id = ?
         """
 
+        musician_sql = """
+            DELETE FROM musicians
+            WHERE ensemble_id = ?
+        """
+
+
         CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        CURSOR.execute(musician_sql, (self.id,))
         CONN.commit()
 
         del type(self).all[self.id]

@@ -158,7 +158,7 @@ def list_musicians():
         if ensemble_id in ensemble_name_dict:
             ensemble_name = ensemble_name_dict[ensemble_id]
         else:
-            ensemble_name = "Info Not Available"
+            ensemble_name = "Ensemble Placement Info Not Available"
 
         table.add_row(str(i), musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons, ensemble_name)
 
