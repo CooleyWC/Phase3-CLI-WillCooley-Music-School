@@ -149,18 +149,10 @@ def list_musicians():
     table.add_column('Ensemble placement', style='green4')
 
     musicians = Musician.get_all()
-    all_ensembles = Ensemble.get_all()
-
-    ensemble_name_dict = {ensemble.id: ensemble.name for ensemble in all_ensembles}
-
+    
     for i, musician in enumerate(musicians, start=1):
-        ensemble_id = musician.ensemble_id
-        if ensemble_id in ensemble_name_dict:
-            ensemble_name = ensemble_name_dict[ensemble_id]
-        else:
-            ensemble_name = "Ensemble Placement Info Not Available"
-
-        table.add_row(str(i), musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons, ensemble_name)
+        ensemble = musician.ensemble()
+        table.add_row(str(i), musician.name, musician.instrument, str(musician.age), str(musician.audition_score), musician.private_lessons, ensemble.name)
 
     console = Console()
     console.print(table)

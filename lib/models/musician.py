@@ -205,3 +205,14 @@ class Musician:
         """ 
         rows = CURSOR.execute(sql, (instrument,)).fetchall()
         return [cls.instance_from_db(row) for row in rows]
+    
+    # new
+    def ensemble(self):
+        sql = """
+            SELECT *
+            FROM ensembles
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.ensemble_id, ),)
+        row = CURSOR.fetchone()
+        return Ensemble.instance_from_db(row) if row else None

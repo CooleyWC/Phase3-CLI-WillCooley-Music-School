@@ -192,6 +192,4 @@ class Ensemble:
         CURSOR.execute(sql, (self.id, ),)
 
         rows = CURSOR.fetchall()
-        return [
-            Musician.instance_from_db(row) for row in rows
-        ]
+        return [Musician.instance_from_db(row) for row in rows]

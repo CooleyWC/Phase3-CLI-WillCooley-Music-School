@@ -66,7 +66,7 @@ def ensembles():
                 find_ensemble_by_level()   
                 list_ensembles() 
             elif choice == "B" or choice == "b":
-                break
+                return
             elif choice == "E" or choice == "e":
                 exit_program()
             else:
@@ -104,7 +104,7 @@ def ensemble_options(selected_ensemble):
             musicians_in_ensemble(selected_ensemble)
         elif choice == "B" or choice ==  "b":
             list_ensembles()
-            break
+            return
         elif choice == "E" or choice =="e":
             exit_program()
         else:
@@ -132,9 +132,8 @@ def musicians_in_ensemble(selected_ensemble):
             delete_musician()
             view_ensemble_musicians(selected_ensemble)
         elif choice == "B" or choice == "b":
-            list_ensembles()
-            ensembles()
-            break
+            view_ensemble(selected_ensemble)
+            return
         elif choice == "E" or choice =="e":
             exit_program()
         else:
@@ -144,7 +143,7 @@ def musicians_in_ensemble_menu():
     print("Type A or a to add a musician ")
     print("Type U or u to update a musician")
     print("Type D or d to delete a musician")
-    print("Type B or b to go back to musician menu")
+    print("Type B or b to go back to individual ensemble menu")
     print("Type E or e to exit the program")
 
 def musicians():
@@ -161,7 +160,8 @@ def musicians():
         elif choice == "I" or choice == "i":
             view_musicians_by_instrument()
         elif choice == "B" or choice == "b":
-            break
+            return
+            # break
         elif choice == "E" or choice =="e":
             exit_program()
         else:
@@ -189,7 +189,7 @@ def musician_options():
             delete_musician()
             list_musicians()
         elif choice == "B" or choice == "b":
-            break
+            return
         elif choice == "E" or choice =="e":
             exit_program()
         else:
