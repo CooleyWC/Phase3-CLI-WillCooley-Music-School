@@ -36,9 +36,7 @@ class Musician:
     
     @instrument.setter
     def instrument(self, instrument):
-        if type(instrument) != str:
-            raise ValueError('needs to be a string')
-        elif instrument.lower() not in Musician.VALID_INSTRUMENTS:
+        if instrument.lower() not in Musician.VALID_INSTRUMENTS:
             raise ValueError('needs to be in the valid instrument list')
         else:
             self._instrument = instrument
