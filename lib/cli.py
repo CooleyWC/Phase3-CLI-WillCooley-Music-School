@@ -123,7 +123,7 @@ def musicians_in_ensemble(selected_ensemble):
         musicians_in_ensemble_menu()
         choice = input("> ")
         if choice == "A" or choice == "a":
-            add_musician()
+            add_musician(selected_ensemble)
             view_ensemble_musicians(selected_ensemble)
         elif choice == "U" or choice == "u":
             update_musician()
