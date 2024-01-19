@@ -173,26 +173,12 @@ def add_musician(num = None):
     elif not num:
         ensemble_name = input("Confirm the ensemble placement by typing the name of the ensemble the musician is placed in: ")
         ensemble = Ensemble.find_by_name(ensemble_name)
-        # ensemble_id = found_ensemble.id
 
     try:
         musician = Musician.create(name, instrument, int(age), int(audition_score), private_lessons, int(ensemble.id))
         console.print(f"Success: {musician.name} was successfully created", style='success')
     except Exception as exc:
             console.print("Uh oh: There was an error creating your musician", exc, style='error')
-
-    # elif not num:
-    #     ensemble_name = input("Confirm the ensemble placement by typing the name of the ensemble the musician is placed in: ")
-    #     found_ensemble = Ensemble.find_by_name(ensemble_name)
-    #     ensemble_id = found_ensemble.id
-    #     try:
-    #         musician = Musician.create(name, instrument, int(age), int(audition_score), private_lessons, int(ensemble_id))
-    #         console.print(f"Success: {musician.name} was successfully created", style='success')
-    #     except Exception as exc:
-    #         console.print("Uh oh: There was an error creating your musician", exc, style='error')
-
-    # else:
-    #     console.print('Uh oh: There was an error creating your musician', style='error')
 
 
 def find_musician_by_name():
